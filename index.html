@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BLRPULSE — Hackathons, Tech Fests & Internships in Bangalore</title>
+  <meta name="description" content="Every hackathon, company tech fest, meetup, workshop and internship in Bangalore — dates, venues, deadlines and application links in one place." />
+  <script>
+    // Apply saved theme before paint to avoid a flash.
+    try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#events">Skip to events</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#" class="logo" aria-label="BLRPULSE home">
+        <span class="wordmark" aria-hidden="true"><span class="wm-blr">BLR</span><span class="wm-pulse">PULSE</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Sections">
+        <a href="#events">Events</a>
+        <a href="#internships">Internships</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+          <svg class="icon sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <a href="#submit" class="btn" aria-label="List an event or internship">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          <span>List an opportunity</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <p class="eyebrow"><span class="dot"></span> Namma Bengaluru's opportunity board</p>
+
+      <figure class="quote" id="quote" aria-roledescription="carousel" aria-label="Why we built this">
+        <svg class="quote-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zM15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+        <blockquote id="quote-text" aria-live="polite"></blockquote>
+        <div class="quote-dots" id="quote-dots" role="group" aria-label="Choose quote"></div>
+      </figure>
+
+      <h1>Every <span class="hl">opportunity</span> in Bangalore. One place.</h1>
+      <p class="lead">Hackathons, tech fests by big companies, meetups, workshops and internships — with dates, venues, deadlines and application links.</p>
+
+      <form class="search-box" id="search-form" role="search">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <label for="search" class="sr-only">Search events and internships</label>
+        <input type="search" id="search" placeholder="Search AI, internships, Koramangala, React…" autocomplete="off" />
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="popular" id="popular">
+        <span>Popular:</span>
+      </div>
+
+      <div class="stats" id="stats"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Browse by type</h2>
+          <p>Pick a category to jump straight to it.</p>
+        </div>
+      </div>
+      <div class="categories" id="categories"></div>
+    </div>
+  </section>
+
+  <!-- ─── Events ─── -->
+  <main class="section" id="events">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Events</h2>
+          <p>Hackathons, tech fests, meetups, workshops and conferences. Deadlines within a week are highlighted.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="filterbar">
+      <div class="wrap filterbar-inner">
+        <div class="tabs" role="tablist" aria-label="When">
+          <button class="tab" role="tab" data-when="upcoming" aria-selected="true">Upcoming</button>
+          <button class="tab" role="tab" data-when="open" aria-selected="false">Applications open</button>
+          <button class="tab" role="tab" data-when="past" aria-selected="false">Past</button>
+        </div>
+        <div class="selects">
+          <div class="select-wrap">
+            <label for="type" class="sr-only">Event type</label>
+            <select id="type"><option value="">All types</option></select>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="select-wrap">
+            <label for="area" class="sr-only">Area</label>
+            <select id="area"><option value="">All areas</option></select>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="select-wrap">
+            <label for="cost" class="sr-only">Cost</label>
+            <select id="cost">
+              <option value="">Free &amp; paid</option>
+              <option value="free">Free only</option>
+              <option value="paid">Paid only</option>
+            </select>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <button class="clear-btn" id="clear" type="button" hidden>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            Clear filters
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <p class="result-count" id="count" aria-live="polite"></p>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" hidden>
+        <h3>No events match those filters</h3>
+        <p id="empty-hint">Try a broader search, another area, or check the “Past” tab.</p>
+        <button class="btn-ghost" id="empty-clear" type="button">Clear all filters</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── Internships ─── -->
+  <section class="section internships" id="internships">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Internships</h2>
+          <p>Internships at Bangalore companies and startups — stipend, duration, eligibility and where to apply.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="filterbar">
+      <div class="wrap filterbar-inner">
+        <div class="tabs" role="tablist" aria-label="Status">
+          <button class="tab" role="tab" data-istatus="open" aria-selected="true">Open now</button>
+          <button class="tab" role="tab" data-istatus="closed" aria-selected="false">Closed</button>
+        </div>
+        <div class="selects">
+          <div class="select-wrap">
+            <label for="field" class="sr-only">Field</label>
+            <select id="field"><option value="">All fields</option></select>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="select-wrap">
+            <label for="mode" class="sr-only">Work mode</label>
+            <select id="mode"><option value="">Onsite, hybrid &amp; remote</option></select>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="select-wrap">
+            <label for="pay" class="sr-only">Stipend</label>
+            <select id="pay">
+              <option value="">Paid &amp; unpaid</option>
+              <option value="paid">Paid only</option>
+            </select>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <button class="clear-btn" id="iclear" type="button" hidden>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            Clear filters
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <p class="result-count" id="icount" aria-live="polite"></p>
+      <div class="grid" id="igrid"></div>
+      <div class="empty" id="iempty" hidden>
+        <h3>No internships match those filters</h3>
+        <p id="iempty-hint">Try another field or work mode.</p>
+        <button class="btn-ghost" id="iempty-clear" type="button">Clear all filters</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="submit" id="submit">
+    <div class="wrap">
+      <div class="submit-inner">
+        <div>
+          <h2>Hiring interns or running an event?</h2>
+          <p>List your hackathon, tech fest, meetup or internship for free. Send the details and the application link — we'll add it.</p>
+        </div>
+        <a class="btn" href="mailto:hello@example.com?subject=Listing%20-%20BLRPULSE">
+          Submit a listing
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>© <span class="wordmark wordmark-sm"><span class="wm-blr">BLR</span><span class="wm-pulse">PULSE</span></span> · Made in Namma Bengaluru</p>
+      <p>Always confirm details on the organiser's or company's page before you apply or travel.</p>
+      <p class="photo-credit">Header photo: Vidhana Soudha by <a href="https://commons.wikimedia.org/wiki/File:Vidhana_Soudha_(Bengaluru)_-_Centered_facade_view_highlighting_the_central_dome,_grand_portico_columns,_and_state_inscription.jpg" target="_blank" rel="noopener">iMahesh</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons (resized).</p>
+    </div>
+  </footer>
+
+  <script src="events.js"></script>
+  <script src="internships.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
