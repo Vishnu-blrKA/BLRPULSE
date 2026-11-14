@@ -174,8 +174,10 @@
         <p class="desc">${esc(e.description)}</p>
         <ul class="meta">
           <li>${icon("calendar")}<span>${range}${e.time ? ` · ${esc(e.time)}` : ""}</span></li>
-          <li>${icon("pin")}<span><a href="${mapsURL(`${e.venue}, ${e.area}`)}" target="_blank" rel="noopener">${esc(e.venue)}, ${esc(e.area)}${icon("external")}</a></span></li>
-          <li>${icon("ticket")}<span>${e.free ? "Free entry" : esc(e.price || "Paid")}</span></li>
+          <li>${icon("pin")}<span>${e.venueTBA
+            ? `${esc(e.venue)} · ${esc(e.area)}`
+            : `<a href="${mapsURL(`${e.venue}, ${e.area}`)}" target="_blank" rel="noopener">${esc(e.venue)}, ${esc(e.area)}${icon("external")}</a>`}</span></li>
+          <li>${icon("ticket")}<span>${e.free === true ? "Free entry" : esc(e.price || (e.free === false ? "Paid" : "Cost on the official page"))}</span></li>
           ${e.prize ? `<li>${icon("trophy")}<span>${esc(e.prize)}</span></li>` : ""}
           ${e.teamSize ? `<li>${icon("users")}<span>Teams of ${esc(e.teamSize)}</span></li>` : ""}
         </ul>
@@ -236,7 +238,7 @@
       if (state.type && e.type !== state.type) return false;
       if (state.area && e.area !== state.area) return false;
       if (state.cost === "free" && !e.free) return false;
-      if (state.cost === "paid" && e.free) return false;
+      if (state.cost === "paid" && e.free !== false) return false;
       return matches(eq, [e.name, e.organiser, e.company, e.description, e.venue, e.area, e.type, ...(e.tags || [])]);
     });
     if (state.when === "past") list = list.reverse();
