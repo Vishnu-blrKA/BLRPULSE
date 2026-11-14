@@ -66,15 +66,6 @@
   // ─── State ────────────────────────────────────────────────
   const state = { q: "", type: "", area: "", cost: "", when: "upcoming", field: "", mode: "", pay: "", istatus: "open" };
 
-  // ─── Theme toggle ─────────────────────────────────────────
-  $("theme-toggle").addEventListener("click", () => {
-    const root = document.documentElement;
-    const current = root.dataset.theme || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-    const next = current === "light" ? "dark" : "light";
-    root.dataset.theme = next;
-    try { localStorage.setItem("theme", next); } catch (e) {}
-  });
-
   // ─── Hero quotes ──────────────────────────────────────────
   const QUOTES = [
     "Bangalore never runs out of opportunities. We just keep missing them because they're scattered across a hundred places.",
