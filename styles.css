@@ -63,7 +63,7 @@ h1, h2, h3 { margin: 0; font-weight: 800; text-transform: uppercase; letter-spac
 }
 .hbox {
   pointer-events: auto; display: inline-flex; align-items: center; min-height: 44px;
-  background: #fff; color: var(--ink); text-decoration: none;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 45%, #ebefff 100%); color: var(--ink); text-decoration: none;
   box-shadow: 0 1px 0 rgba(16, 16, 16, 0.08), 0 8px 24px -12px rgba(16, 16, 16, 0.35);
 }
 .logo { padding: 0 14px; }
@@ -85,8 +85,8 @@ h1, h2, h3 { margin: 0; font-weight: 800; text-transform: uppercase; letter-spac
   -webkit-text-stroke: 0.025em currentColor;
   font-size: 1.9rem; letter-spacing: 0.03em; padding: 4px 0.08em 0 0;
 }
-.wm-pulse { color: var(--green); }
-.dark .wm-pulse { color: var(--green-bright); }
+.wm-pulse { color: var(--blue); }
+.dark .wm-pulse { color: #6f8bff; }
 .wordmark-xl { font-size: clamp(3.5rem, 9vw, 7rem); }
 
 /* ─── Buttons ───────────────────────────────────────────── */
@@ -375,3 +375,34 @@ h2 { font-size: clamp(2.6rem, 7.5vw, 6rem); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ─── Darker version ────────────────────────────────────────
+   Set <html data-mode="dark"> to turn the off-white sections charcoal.
+   Remove the attribute to get the light/dark mix back. */
+html[data-mode="dark"] body { background: var(--ink); color: var(--paper); }
+html[data-mode="dark"] .light {
+  --bg: #1b1b1d; --fg: var(--paper); --card: #101010;
+  --muted: #b4b4b8; --line: rgba(244, 244, 244, 0.22); --link: #8fa8ff;
+  color-scheme: dark;
+}
+html[data-mode="dark"] .light :focus-visible { outline-color: var(--pink); }
+html[data-mode="dark"] .hero::after {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, #1b1b1d 68%, transparent) 0%,
+    color-mix(in srgb, #1b1b1d 80%, transparent) 60%,
+    #1b1b1d 100%
+  );
+}
+html[data-mode="dark"] .search-box { background: #101010; border-color: var(--paper); }
+html[data-mode="dark"] .search-box:focus-within { border-color: var(--pink); }
+html[data-mode="dark"] .search-box input::placeholder { color: #a0a0a6; }
+html[data-mode="dark"] .search-go:hover { background: var(--pink); color: var(--ink); }
+html[data-mode="dark"] .chip { border-color: var(--paper); }
+html[data-mode="dark"] .chip:hover { background: var(--paper); color: var(--ink); }
+html[data-mode="dark"] .stat b { color: #8fa8ff; }
+html[data-mode="dark"] .discover > span:first-child { text-decoration-color: #8fa8ff; }
+html[data-mode="dark"] .cat:hover,
+html[data-mode="dark"] .cat:focus-visible,
+html[data-mode="dark"] .cat[aria-pressed="true"] { box-shadow: 10px 10px 0 var(--paper); }
+html[data-mode="dark"] .light .card[data-type="Internship"] { --c: #4d6bff; }
