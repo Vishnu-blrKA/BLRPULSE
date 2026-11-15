@@ -196,7 +196,7 @@
   function internCard(i) {
     const open = iOpen(i);
     const initials = i.company.replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase();
-    const place = i.mode === "Remote" ? "Remote" : `${esc(i.mode)} · <a href="${mapsURL(i.area)}" target="_blank" rel="noopener">${esc(i.area)}${icon("external")}</a>`;
+    const place = i.mode === "Remote" ? "Remote" : `${esc(i.mode)} · <a href="${mapsURL(`${i.company} office, ${i.area}`)}" target="_blank" rel="noopener">${esc(i.area)}${icon("external")}</a>`;
     return `
       <article class="card intern" data-type="Internship">
         <div class="card-top">
